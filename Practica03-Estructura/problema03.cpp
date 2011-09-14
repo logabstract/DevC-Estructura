@@ -23,7 +23,6 @@
       printf("Ingrese los elementos\n");
       
       ingresarVector(array,n);
-      
       cout<<"\n\nel vector ingresado es:\n";
       mostrarVector(array,n);
       rotarVector(array,n);
