@@ -11,6 +11,7 @@
  void ingresarVector(int a[],int n);
  void mostrarVector(int a[],int n);
  void rotarVector(int a[],int n);
+ void invertir(int a[],int i,int j);
 
 
  int main()
@@ -50,17 +51,30 @@
   
   void rotarVector(int a[],int n)
   {
-      int i,posicion,indice,temp;
-      cout<<"\n\ncuantas posiciones desea rotar ?";cin>>posicion;
+      int dato;
+      cout<<"\n\nElija un elemento para rotar poniendolo primero\nen el arreglo: ";
+      cin>>dato;
+      dato--;
+      invertir(a,0,dato-1);
+      invertir(a,dato,n-1);
+      invertir(a,0,n-1);
       
-      for(i=0;i < posicion;i++)
-      {
-         temp = a[0];
-         for(indice=0;indice < n-1;indice++)
-            a[indice] = a[indice+1];
-         a[n-1] = temp;
-      }
-      
+      cout<<"\n\nEl vector rotado es:\n\n";
       mostrarVector(a,n);
-      cout<<"\n\nvector rotado "<<posicion<<" posiciones"<<endl;
+      printf("\n\n");
+      
+   }
+   
+   void invertir(int a[],int i,int j)
+   {
+      if(i == j)
+         return;
+      while(i < j)
+      {
+         int temp = a[i];
+         a[i] = a[j];
+         a[j] = temp;
+         i++;
+         j--;
+      }
    } 
