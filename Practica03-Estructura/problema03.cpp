@@ -58,7 +58,6 @@
       invertir(a,0,dato-1);
       invertir(a,dato,n-1);
       invertir(a,0,n-1);
-      
       cout<<"\n\nEl vector rotado es:\n\n";
       mostrarVector(a,n);
       printf("\n\n");
