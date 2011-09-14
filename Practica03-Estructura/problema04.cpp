@@ -19,7 +19,7 @@
       int n;
       float array[MAX],prom;
       
-      printf("Ingrese el tamaño del vector: "); cin>>n;
+      printf("Ingrese el tamaï¿½o del vector: "); cin>>n;
       
       printf("Ingrese los elementos\n");
       
