@@ -23,6 +23,7 @@ class TiempoSimple{
                 "aStringUniversal()" ,aStringUniversal());
     }
 
+
     public String aStringUniversal(){
 
         return String.format("%02d:%02d:%02d",
