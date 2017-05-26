@@ -121,7 +121,7 @@ public class PreOrderHeaderInput
 
     public void setAccountPayment(String accountPayment)
     {
-        this.accountPayment = Formatters.truncateRightWithSpaces(accountPayment, PaymentWsConstants.TBK_TRSG_HEADER_LENGTH_ACCOUNT_PAYMENT);
+        this.accountPayment = Formatters.truncateLeftWithZeros(accountPayment, PaymentWsConstants.TBK_TRSG_HEADER_LENGTH_ACCOUNT_PAYMENT);
     }
 
     public String getZeros()
@@ -151,7 +151,7 @@ public class PreOrderHeaderInput
 
     public void setTotal1(String total1)
     {
-        this.total1 = Formatters.truncateLeftWithZeros(total1, PaymentWsConstants.TBK_TRSG_HEADER_LENGTH_TOTAL);
+        this.total1 = Formatters.truncateLeftWithZeros(Formatters.formatDecimal(total1, 2), PaymentWsConstants.TBK_TRSG_HEADER_LENGTH_TOTAL);
     }
 
     public String getTotal2()
@@ -161,7 +161,7 @@ public class PreOrderHeaderInput
 
     public void setTotal2(String total2)
     {
-        this.total2 = Formatters.truncateLeftWithZeros(total2, PaymentWsConstants.TBK_TRSG_HEADER_LENGTH_TOTAL);
+        this.total2 = Formatters.truncateLeftWithZeros(Formatters.formatDecimal(total2, 2), PaymentWsConstants.TBK_TRSG_HEADER_LENGTH_TOTAL);
     }
 
     public String getCurrency()
@@ -312,7 +312,7 @@ public class PreOrderHeaderInput
 
     public void setContract2(String contract2)
     {
-        this.contract2 = Formatters.truncateLeftWithZeros(contract2, PaymentWsConstants.TBK_TRSG_LENGTH_CONTRACT_HEADER);
+        this.contract2 = getContract1();
     }
 
     public String getCompanySequence()
