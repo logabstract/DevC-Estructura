@@ -10,7 +10,9 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,6 +43,7 @@ import pe.com.scotiabank.tbk.util.beans.User;
 import pe.com.scotiabank.tbk.util.dao.ConnectAS400;
 import pe.com.scotiabank.tbk.util.exception.TBKWebServiceGenericException;
 import pe.com.scotiabank.tbk.util.utilities.Constants;
+import pe.com.scotiabank.tbk.util.utilities.Functions;
 
 public class PaymentsProcessServiceTest
 {
@@ -89,11 +92,11 @@ public class PaymentsProcessServiceTest
 
         ValOrderResponse response = null;
         user = new User();
-        user.setContract("0043");
+        user.setContract("4709");
         user.setUserCode("01");
 //        user.setSessionId("0000000");
 
-        response = paymentsProcessServices.validateOrder(user, "001", "254");
+        response = paymentsProcessServices.validateOrder(user, "001", "252");
 
         System.out.println(UtilTest.processResponseObject(response));
         System.out.println(response.getStatus().getCode() + " " + response.getStatus().getMessage());
@@ -381,7 +384,7 @@ public class PaymentsProcessServiceTest
 
         String contract = "4907";
         String userCode = "01";
-        String order = "1019";
+        String order = "252";
         String companySequence = "001";
 
         user = new User();
@@ -393,8 +396,8 @@ public class PaymentsProcessServiceTest
         header.setContract1(contract);
         header.setOrder(order);// 4 dig
 //        header.setDate("25/05/2017");
-        header.setAccountPayment("0000");
-        header.setChequePayments("0001");
+        header.setAccountPayment("");
+        header.setChequePayments("1");
         header.setTotal1("411.25");
         header.setTotal2("411.25");
         header.setCurrency("92");
@@ -403,15 +406,15 @@ public class PaymentsProcessServiceTest
 //        header.setSecurityCodeModule("76");
 //        header.setSecurityCode("39");
 //        header.setTime("144759");
-        header.setAccountType("2");// 2 o 3
+        header.setAccountType("2");// 2 o 3 
 //        header.setHigherPayment("411.25");
         header.setContract2(contract);
         header.setCompanySequence(companySequence);
         header.setUser(userCode);
-        header.setPaymentQuantities("0001");
-        header.setReference("000000000000000");
-        header.setAccountPayment2("00000");
-        header.setChequePayment("00001");
+        header.setPaymentQuantities("1");
+        header.setReference("");
+        header.setAccountPayment2("");
+        header.setChequePayment("1");
         header.setUserName("USUARIO 01");
 
         TRSGFileDetailInput[] details = new TRSGFileDetailInput[1];
@@ -420,20 +423,23 @@ public class PaymentsProcessServiceTest
         details[0].setServiceName("EL CARMELO");
         details[0].setReceiptNumber("");
 //        details[0].setDate("20170401");
-        details[0].setReceiptNumber2("0003");
-        details[0].setExpiryDate("20180113");
+        details[0].setReceiptNumber2("12");
+        details[0].setExpiryDate("13/01/2018");
         details[0].setSupplyCode("20170410");
-        details[0].setAmount("00000041125");
+        details[0].setAmount("411.25");
         details[0].setServiceType("001");
         details[0].setSecurityCode("06");
         details[0].setOffice("000");
         details[0].setAccountCode2("4544242");
         details[0].setRuc2("20140962644");
 
+        Date now = new Date();
+        String strDate = Functions.getCurrentTime(now, new SimpleDateFormat("YYYYMMdd"));
+        
         String paymentType = "11";
         String chargeAccount = "45442420001";
-        String programmeDate = "20170501";
-        String reference = "000000000000000";
+        String programmeDate = strDate;
+        String reference = "0";
         String receiptTotal = "1";
 
         ProcessSheduleServiceOrderResponse response = paymentsProcessServices.processSheduleServiceOrder(user, order,
